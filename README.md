@@ -1,5 +1,7 @@
 # Mangaplus Downloader
 
+> **Fork** of [hurlenko/mloader](https://github.com/hurlenko/mloader) with support for authenticated session tokens.
+
 [![Latest Github release](https://img.shields.io/github/tag/hurlenko/mloader.svg)](https://github.com/hurlenko/mloader/releases/latest)
 ![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)
 ![License](https://img.shields.io/badge/license-GPLv3-blue.svg)
@@ -10,6 +12,7 @@
 
 - [Installation](#-installation)
 - [Usage](#-usage)
+- [Authentication](#-authentication)
 - [Command line interface](#%EF%B8%8F-command-line-interface)
 
 ## 💾 Installation
@@ -31,6 +34,21 @@ You can use `--title` and `--chapter` command line argument to download by title
 You can download individual chapters or full title (but only available chapters).
 
 Chapters can be saved as `CBZ` archives (default) or separate images by passing the `--raw` parameter.
+
+## 🔑 Authentication
+
+Some chapters require a MangaPlus account to access. You can pass your session token via the `--token` flag or the `MLOADER_TOKEN` environment variable:
+
+```bash
+mloader --token YOUR_SESSION_TOKEN https://mangaplus.shueisha.co.jp/viewer/...
+```
+
+```bash
+export MLOADER_TOKEN=YOUR_SESSION_TOKEN
+mloader https://mangaplus.shueisha.co.jp/viewer/...
+```
+
+To obtain your session token, log in to MangaPlus in a browser and inspect the requests — look for the `Session-Token` header in API calls.
 
 ## 🖥️ Command line interface
 
@@ -60,5 +78,7 @@ Options:
                                   [default: False]
   --chapter-subdir                Save raw images in sub directory by chapter
                                   [default: False]
+  -k, --token TEXT                Session token for authenticated requests
+                                  [$MLOADER_TOKEN]
   --help                          Show this message and exit.
 ```

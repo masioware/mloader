@@ -182,6 +182,13 @@ Examples:
     show_default=True,
     help="Save raw images in sub directory by chapter",
 )
+@click.option(
+    "--token",
+    "-k",
+    default=None,
+    help="Session token for authenticated requests.",
+    envvar="MLOADER_TOKEN",
+)
 @click.argument("urls", nargs=-1, callback=validate_urls, expose_value=False)
 @click.pass_context
 def main(
@@ -195,6 +202,7 @@ def main(
     last: bool,
     chapter_title: bool,
     chapter_subdir: bool,
+    token: Optional[str] = None,
     chapters: Optional[Set[int]] = None,
     titles: Optional[Set[int]] = None,
 ):
@@ -213,7 +221,7 @@ def main(
         add_chapter_subdir=chapter_subdir,
     )
 
-    loader = MangaLoader(exporter, quality, split)
+    loader = MangaLoader(exporter, quality, split, token=token)
     try:
         loader.download(
             title_ids=titles,

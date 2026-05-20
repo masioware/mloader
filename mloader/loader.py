@@ -29,6 +29,7 @@ class MangaLoader:
         exporter: Callable[[Title, Chapter, Optional[Chapter]], ExporterBase],
         quality: str = "super_high",
         split: bool = False,
+        token: Optional[str] = None,
     ):
         self.exporter = exporter
         self.quality = quality
@@ -41,6 +42,8 @@ class MangaLoader:
                 "rv:72.0) Gecko/20100101 Firefox/72.0"
             }
         )
+        if token:
+            self.session.headers.update({"Session-Token": token})
 
     def _decrypt_image(self, url: str, encryption_hex: str) -> bytearray:
         resp = self.session.get(url)
