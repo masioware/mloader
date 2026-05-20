@@ -50,6 +50,8 @@ mloader https://mangaplus.shueisha.co.jp/viewer/...
 
 To obtain your session token, log in to MangaPlus in a browser and inspect the requests — look for the `Session-Token` header in API calls.
 
+![How to get the session token](assets/how_to_get_session_token.png)
+
 ## 🖥️ Command line interface
 
 Currently `mloader` supports these commands
